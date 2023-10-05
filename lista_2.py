@@ -134,7 +134,6 @@ else:
     print("Falha ao realizar o login")
 
 #Exercício 4: Corrida
-
 import random
 
 class Competidor:
@@ -157,26 +156,30 @@ class Competidor:
         elif self.pos == 13:
             self.pos == 0
         elif self.pos>=20:
-            pass
+            self.pos = 20
         else:
-            self.pos == self.pos
+            pass
         for i in range(len(grid)):
-            i += self.pos 
-            if grid[i] != '*' and grid[i] != self.nome:
-                print(grid[i],'disputando posição com ',self.nome)
-                rodar = random.randint(0,10)
-                if rodar % 2==0:
-                    print(self.nome,'ultrapassou',grid[i])
+            if self.pos < 20:
+                i += self.pos 
+                if grid[i] != '*' and grid[i] != self.nome:
+                    print(grid[i],'disputando posição com ',self.nome)
+                    rodar = random.randint(0,10)
+                    if rodar % 2==0:
+                        print(self.nome,'ultrapassou',grid[i])
+                        grid[i] = self.nome
+                        print(grid)
+                        break
+                    else:
+                        print(grid[i],' manteve a posição')
+                        print(grid)
+                        break
+                else:    
                     grid[i] = self.nome
                     print(grid)
                     break
-                else:
-                    print(grid[i],' manteve a posição')
-                    print(grid)
-                    break
-            else:    
-                grid[i] = self.nome
-                print(grid)
+            else:
+                self.pos == 20
                 break
 
 
@@ -196,8 +199,8 @@ nome5 = input('informe o nome do quinto piloto: ')
 piloto_5 = Competidor(nome5)
 
 grid = ['*']*20
-tamanho=len(grid)
-while grid[tamanho-1] == '*':
+
+while grid[-1] == '*':
     print('RODADA DE ',piloto_1.nome)
     piloto_1.atualizar(grid)
     piloto_1.get_pos()
